@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" href="%sveltekit.assets%/favicon.png" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		%sveltekit.head%
+	</head>
+	<body data-sveltekit-preload-data="hover">
+		<div style="display: contents">%sveltekit.body%</div>
+	</body>
+</html>
+<style>
+@font-face {
+    font-family: 'MyFont';
+    src: url('/fonts/Cascadia.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+  }
+
+  /* Apply the custom font to all elements */
+  * {
+    font-family: 'MyFont', sans-serif;
+    margin: 0.4em;
+    padding: 0em;
+    box-sizing: border-box;
+  }
+  body {
+	background-color: #262626;
+	color:white;
+  }
+  a {
+	   color:rgb(255, 102, 0);
+	   text-decoration: none;
+  }
+  ul {
+    list-style-type: none;
+    padding: 0;
+  }
+</style>
