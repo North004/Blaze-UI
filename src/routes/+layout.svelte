@@ -3,7 +3,7 @@
 	import axios from "axios";
 	import { onMount } from "svelte";
   import { isLoggedInStore,usernameStore} from "$lib/stores";
-
+  import Friend from './Friends.svelte'; // Import the component'
   type Response = {
 	username(username: any): unknown;
     status: string,
@@ -70,5 +70,38 @@
 </header>
 
 <main>
-  <slot></slot>
+  <div class="container">
+    <div class="friend">
+      <Friend></Friend>
+    </div>
+    <div class="slot">
+      <slot></slot>
+    </div>
+    <div class="extra">
+    </div>
+  </div>
 </main>
+
+
+<style>
+  body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+  }
+  .container {
+      display: grid;
+      grid-template-columns: 1fr 3fr 1fr;
+      gap: 10px;
+      height: 100vh;
+  }
+  .friend, .slot, .extra {
+      background-color: #262626;
+      padding: 20px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      box-sizing: border-box;
+  }
+  .extra {
+     
+  }
+</style>
+

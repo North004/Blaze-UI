@@ -1,4 +1,5 @@
 <script>
+	import { goto } from '$app/navigation';
   import axios from 'axios';
   import { fly, fade } from 'svelte/transition';
   

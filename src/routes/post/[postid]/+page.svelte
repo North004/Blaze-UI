@@ -43,7 +43,7 @@
     console.log('Reacting to post with ID:', postId, 'Is like:', isLike); // Debugging
     try {
       const response = await axios.post(`http://localhost:8000/posts/${postId}/react`, {
-        like: isLike
+        is_like: isLike
       }, { withCredentials: true });
 
       if (response.data.status === 'success') {

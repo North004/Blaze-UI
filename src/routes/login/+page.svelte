@@ -2,6 +2,7 @@
   import axios from 'axios';
   import { fly, fade } from 'svelte/transition';
   import { isLoggedInStore ,usernameStore} from '$lib/stores';
+	import { goto } from '$app/navigation';
   let username = '';
   let password = '';
 
@@ -29,6 +30,7 @@
         password = '';
         isLoggedInStore.set(true);
         usernameStore.set(response.data.data.username);
+        goto("/upload");
       } 
       else if (response.data.status === 'fail') {
         const errors = response.data.data;
