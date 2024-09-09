@@ -1,31 +1,24 @@
 <script lang="ts">
-	import { goto } from "$app/navigation";
 	import axios from "axios";
 	import { onMount } from "svelte";
   import { isLoggedInStore,usernameStore} from "$lib/stores";
-  import Friend from './Friends.svelte'; // Import the component'
-  type Response = {
-	username(username: any): unknown;
-    status: string,
-  };
+  import Friend from './Friends.svelte'; 
 
   $: loggedIn= $isLoggedInStore;
   $: username = $usernameStore;
+
   async function logout() {
 		try {
-			// Corrected to use withCredentials in the config object
 			const response = await axios.post('http://localhost:8000/auth/logout', {}, { withCredentials: true});
 
-			// Optional: You might want to handle the response, e.g., redirecting after a successful logout
-			if (response.status === 200) {
-				// Redirect to the home page or login page after successful logout
+			if (response.data.status === "success") {
         isLoggedInStore.set(false);
         usernameStore.set("");
 			} else {
-				console.error("Logout failed");
+				alert("An error occured");
 			}
 		} catch (error) {
-			console.error("Logout error", error);
+          alert("An error occured");
 		}
 	}
   async function is_logged_in() {
@@ -37,71 +30,101 @@
       }
       else {
         isLoggedInStore.set(false);
-
+        usernameStore.set("");
       }
     }
     catch (error) {
-      console.error("error fetching isloggedout")
-      isLoggedInStore.set(false);
-
+      alert("An error occured")
     }
-  
   }
 
   onMount(async ()  => {
     is_logged_in()
-  })
+  });
+
 </script>
 
 <header>
-  <nav>
+  <nav class="navbar">
     <a href="/" class="nav-link">Home</a>
     <a href="/posts" class="nav-link">Posts</a>
     {#if !loggedIn}
-    <a href="/register" class="nav-link">Register</a>
-    <a href="/login" class="nav-link">Login</a>
+       <a href="/register" class="nav-link">Register</a>
+       <a href="/login" class="nav-link">Login</a>
     {:else}
-    <!-- svelte-ignore a11y_invalid_attribute -->
-    <span>{username}</span>
-    <a href="#" on:click|preventDefault={logout} class="link-button">Logout</a>
+       <span class="username">{username}</span>
+       <a href="/" on:click|preventDefault={logout} class="link-button">Logout</a>
     {/if}
   </nav>
-  <hr>
 </header>
 
 <main>
-  <div class="container">
-    <div class="friend">
-      <Friend></Friend>
-    </div>
-    <div class="slot">
-      <slot></slot>
-    </div>
-    <div class="extra">
-    </div>
+  <div class="grid-container">
+      <div class="friend">
+           <Friend></Friend>
+       </div>
+       <div class="main">
+          <slot></slot>
+       </div>
+       <div class="extra">
+       </div>
   </div>
 </main>
 
-
 <style>
-  body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-  }
-  .container {
-      display: grid;
-      grid-template-columns: 1fr 3fr 1fr;
-      gap: 10px;
-      height: 100vh;
-  }
-  .friend, .slot, .extra {
-      background-color: #262626;
-      padding: 20px;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-      box-sizing: border-box;
-  }
-  .extra {
-     
-  }
+  .grid-container {
+    display: grid;
+    grid-template-columns: 1fr 4fr 1fr; /* Three equal columns */
+    gap: 10px; /* Space between grid items */
+    padding: 10px; /* Space inside the grid container */
+}
+.friend,.main,.extra {
+    background-color: #ffffff; 
+    padding: 20px; 
+    border: 1px solid #ddd; 
+    text-align: center; 
+}
+
+
+/*navbar*/
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    color: white;
+    font-weight: bold;
+    font-size:1.2em;
+}
+
+.nav-link, .link-button {
+    color: white;
+    text-decoration: none;
+    margin: 0 10px;
+    padding: 8px 16px;
+    border-radius: 4px;
+    color: black;
+    transition: background-color 0.3s;
+}
+
+.nav-link:hover, .link-button:hover {
+    background-color: #555;
+}
+
+.username {
+    margin: 0 10px;
+}
+
+.link-button {
+    background-color: #e74c3c;
+    border: none;
+    cursor: pointer;
+}
+
+.link-button:hover {
+    background-color: #c0392b;
+}
+
 </style>
+
 

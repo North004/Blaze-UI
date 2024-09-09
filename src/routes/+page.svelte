@@ -1,24 +1,24 @@
-<script>
-    // Add any additional JavaScript or TypeScript logic here if needed
-  </script>
-  
-  <main>
-    <header>
-      <div class="logo">
-        <span>🔥 Blazer</span> 
-      </div>
-      <nav>
-        <a href="/register" class="signup-link">Sign Up</a>
-      </nav>
+<main>
+   <header>
+        <div class="container">
+           <span class="centered">🔥 Blaze</span> 
+        </div>
+        <nav>
+           <a href="/register" class="signup-link">Sign Up</a>
+        </nav>
     </header>
-  </main>
+</main>
 
 <style>
-   .logo{
-    display: grid;
-    place-items: center; /* Centers both horizontally and vertically */
-    height: 80vh;       /* Takes full viewport height */
-    font-size:5em;
+  .container {
+            display: grid;
+            place-items: center; /* Center horizontally and vertically */
+            height: 90vh; /* Full viewport height */
+  }
+  .centered {
+            width: 300px; 
+            padding: 20px;
+            font-size:6em;
+            text-align: center;
   }
 </style>
-  

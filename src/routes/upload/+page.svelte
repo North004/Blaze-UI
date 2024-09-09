@@ -49,26 +49,7 @@
     };
   </script>
   
-  <style>
-    .message {
-      padding: 1em;
-      margin-top: 1em;
-      border-radius: 5px;
-      font-weight: bold;
-    }
-  
-    .success {
-      color: green;
-      border: 1px solid green;
-      background-color: #d4edda;
-    }
-  
-    .error {
-      color: red;
-      border: 1px solid red;
-      background-color: #f8d7da;
-    }
-  </style>
+
   
   <form on:submit={handleSubmit}>
     <input type="file" accept="*/*" on:change={handleFileChange} />
